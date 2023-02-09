@@ -8,14 +8,13 @@ const UserInfo = () => {
     const id = useParams()
     const [state,dispatch] = useContext(DataContext)
     const user = state.contacts.filter((item) => item.id == id.id)
-    let friends = [];
     // for(let i = 0;i<user[0].friends;i++){
     //     console.log(user[0].friends[i])
     // }
-    user[0].friends.map((item) => {
-        friends = state.contacts.filter((user) => user.id === item)
+    const friends =  user[0].friends.map((item) => {
+        return state.contacts.filter((user) => user.id === item)
     })
-    console.log(friends)
+    console.log(friends[0].name)
 
 
   return (
@@ -32,10 +31,10 @@ const UserInfo = () => {
                 {friends ? friends.map((item) => (
                     <div className={styles.card}>
                         <div className={styles.card_details}>
-                        <p className={styles.text_title}>{item.name}</p>
+                        <p className={styles.text_title}>{item[0].name}</p>
                         <p className={styles.text_body}>Here are the details of the card</p>
                         </div>
-                        <a href={`/contacts/${item.id}`}><button className={styles.card_button}>More info</button></a>
+                        <a href={`/contacts/${item[0].id}`}><button className={styles.card_button}>More info</button></a>
                     </div>
                 )): <p>Loading...</p>}
             </div>
